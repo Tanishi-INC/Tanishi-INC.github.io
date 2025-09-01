@@ -1,0 +1,184 @@
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Buy A diesel!</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+    
+    form {
+      background-color: #e0f7fa;
+      padding: 20px;
+      border-radius: 10px;
+      width: 400px;
+      margin: 40px auto;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    select, textarea, input[type="text"] {
+      width: 100%;
+      margin-top: 5px;
+      padding: 8px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    textarea {
+      background-color: #fff8e1;
+      resize: none;
+      height: 100px;
+    }
+    fieldset {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-top: 15px;
+      border-radius: 5px;
+    }
+    legend {
+      font-weight: bold;
+    }
+    .buttons {
+      margin-top: 15px;
+      display: flex;
+      justify-content: space-between;
+    }
+    input[type="submit"], input[type="reset"] {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    input[type="submit"] {
+      background-color: #4caf50;
+      color: white;
+    }
+    input[type="reset"] {
+      background-color: #f44336;
+      color: white;
+    }
+    .votes {
+      margin-top: 20px;
+      text-align: center;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+<h1>Diesel V Gas the grand conclusion</h1>
+<p>Reliable forms of transportation is a concern of many. Choosing diesel over gasoline will
+save you money because diesel engines last longer than gasoline engines, which means less repairs
+over is lifespan. diesel engines are more efficient than gasoline engines because of its high torque
+outputs and the higher energy content of diesel fuel, the produce less harmful emission such as
+<br>
+carbon monoxide. Diesel fuel cannot release hydrocarbons like gasoline does which means less
+possibility for ground level ozone to build. Diesel will save you time and money allowing you to
+spend time doing other things more important than worrying about fuel costs and what is next to
+fix on your vehicle.</p>
+
+<h2>Works Cited</h2>
+<ul>
+    <li>
+      Sullivan, J. L., et al. “CO<sub>2</sub> Emission Benefit of Diesel (versus Gasoline) Powered Vehicles.” 
+      <cite>Environmental Science &amp; Technology</cite>, vol. 38, no. 12, June 2004, pp. 3217–23. 
+      <a href="https://doi.org/10.1021/es034928d" target="_blank">https://doi.org/10.1021/es034928d</a>.
+    </li>
+    <li>
+      Halderman, James D. <cite>Hybrid and Alternative Fuel Vehicles</cite>. Boston, Pearson, 2016.
+    </li>
+    <li>
+      Halderman, James D. <cite>Automotive Engines: Theory and Servicing</cite>. New York, Pearson, 2018.
+    </li>
+    <li>
+      Research, Hearst Autos. “Diesel vs. Gasoline: Everything You Need to Know.” 
+      <cite>Car and Driver</cite>, 28 Apr. 2020. 
+      <a href="https://www.caranddriver.com/research/a31515330/diesel-vs-gasoline/" target="_blank">
+        https://www.caranddriver.com/research/a31515330/diesel-vs-gasoline/
+      </a>.
+    </li>
+  </ul>
+
+
+
+<form id="dieselForm">
+    <h2>Diesel Vehicle Survey</h2>
+
+    <label for="name">Your Name:</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="consider">Would you consider a diesel vehicle for daily use?</label>
+    <select id="consider" name="consider" required>
+      <option value="">--Please choose an option--</option>
+      <option value="Yes">Yes</option>
+      <option value="No">No</option>
+    </select>
+
+    <fieldset>
+      <legend>How strongly do you feel about your choice?</legend>
+      <label><input type="radio" name="strength" value="Strongly"> Strongly</label>
+      <label><input type="radio" name="strength" value="Somewhat"> Somewhat</label>
+      <label><input type="radio" name="strength" value="Neutral"> Neutral</label>
+    </fieldset>
+
+    <label for="comments">Additional Comments:</label>
+    <textarea id="comments" name="comments" placeholder="Write your thoughts here..."></textarea>
+
+    <div class="buttons">
+      <input type="submit" value="Submit">
+      <input type="reset" value="Reset">
+    </div>
+
+    <div class="votes" id="voteCount">
+      Yes votes: <span id="yesCount">0</span><br>
+      No votes: <span id="noCount">0</span>
+    </div>
+  </form>
+
+  <script>
+    const form = document.getElementById('dieselForm');
+    const yesCountEl = document.getElementById('yesCount');
+    const noCountEl = document.getElementById('noCount');
+
+    // Load counts from localStorage or initialize to 0
+    let yesVotes = parseInt(localStorage.getItem('dieselVotesYes')) || 0;
+    let noVotes = parseInt(localStorage.getItem('dieselVotesNo')) || 0;
+
+    // Display current counts
+    yesCountEl.textContent = yesVotes;
+    noCountEl.textContent = noVotes;
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent page refresh
+
+      const choice = form.consider.value;
+      if (choice === "Yes") {
+        yesVotes++;
+        localStorage.setItem('dieselVotesYes', yesVotes);
+      } else if (choice === "No") {
+        noVotes++;
+        localStorage.setItem('dieselVotesNo', noVotes);
+      }
+
+      // Update display
+      yesCountEl.textContent = yesVotes;
+      noCountEl.textContent = noVotes;
+
+      alert("Thanks for your response, " + form.name.value + "!");
+      form.reset();
+    });
+  </script>
+
+
+</body>
+<footer>
+<div><nav><a href="Index.html">What are Diesel Engines</a>
+&nbsp;
+<a href="Page2.html">Diesel advantages</a>
+&nbsp;
+<a href="page3.html">Reliable Technology</a>
+&nbsp;
+<a href="page4.html">Buy a diesel today!</a></nav></div>
+</footer>
+</html>

@@ -1,0 +1,29 @@
+/* styles.css */
+* {margin:0;padding:0;box-sizing:border-box;}
+body {font-family:Arial, Helvetica, sans-serif;line-height:1.6;color:#222;background:lightblue;text-align:center;}
+a {text-decoration:none;color:inherit;transition:color .3s, text-decoration .3s;}
+a:hover {color:#003366;text-decoration:underline;}
+header {background:#003366;color:#fff;padding:1rem 2rem;}
+header h1 {font-size:1.5rem;}
+nav {margin-top:.5rem;}
+nav ul {display:inline-flex;flex-wrap:wrap;list-style:none;gap:1rem;padding:0;}
+nav a {padding:.5rem 1rem;border-radius:6px;transition:background .3s;}
+nav a:hover {background:rgba(255,255,255,.2);}
+main {max-width:900px;margin:2rem auto;padding:1.5rem;background:#fff;border-radius:10px;box-shadow:0 4px 15px rgba(0,0,0,.1);text-align:center;}
+main h1, main h2 {margin-bottom:1rem;color:#003366;padding:0.8rem 1rem;background:#dbe9ff;border:2px solid #000;border-radius:8px;box-shadow:0 2px 6px rgba(0,0,0,0.05);transition:background .3s, color .3s;}
+main h1:hover, main h2:hover {background:#c2d9ff;color:#000;}
+main p, main ul, main ol {margin-bottom:1rem;color:#444;padding:1rem;background:#fdfdfd;border:2px solid #000;border-radius:8px;box-shadow:0 2px 6px rgba(0,0,0,0.05);}
+main ul, main ol {padding-left:2rem;display:inline-block;text-align:left;}
+img, iframe {max-width:100%;border-radius:8px;margin:20px auto;display:block;float:none;}
+.float-right {float:right;margin:0 0 20px 40px;}
+.center-img {display:block;margin:20px auto;float:none;}
+table {width:80%;margin:0 auto;border-collapse:collapse;background:#fdfdfd;border:2px solid #000;border-radius:8px;box-shadow:0 2px 6px rgba(0,0,0,0.05);}
+th, td {border:2px solid #000;padding:.5rem;text-align:center;}
+th {background:#f0f0f0;}
+footer {background:#003366;color:#fff;text-align:center;padding:1rem;margin-top:2rem;clear:both;}
+footer nav {margin-top:.5rem;}
+footer ul {display:inline-flex;justify-content:center;gap:1rem;list-style:none;flex-wrap:wrap;padding:0;}
+footer a {color:#fff;padding:.3rem .6rem;transition:color .3s;}
+footer a:hover {color:#ffcc00;text-decoration:underline;}
+@media (max-width:600px){nav ul,footer ul{flex-direction:column;align-items:center;}img,iframe{float:none;margin:1rem auto;max-width:100%;display:block;}}
+
