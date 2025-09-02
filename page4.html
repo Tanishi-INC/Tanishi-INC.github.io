@@ -102,73 +102,80 @@ fix on your vehicle.</p>
 
 
 
+ <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script>
+  (function(){
+    emailjs.init("7j2Vg0a-RI2sb78tG"); // Replace with your EmailJS Public Key
+  })();
+</script>
+
 <form id="dieselForm">
-    <h2>Diesel Vehicle Survey</h2>
+  <h2>Diesel Vehicle Survey</h2>
 
-    <label for="name">Your Name:</label>
-    <input type="text" id="name" name="name" required>
+  <label for="name">Your Name:</label>
+  <input type="text" id="name" name="name" required>
 
-    <label for="consider">Would you consider a diesel vehicle for daily use?</label>
-    <select id="consider" name="consider" required>
-      <option value="">--Please choose an option--</option>
-      <option value="Yes">Yes</option>
-      <option value="No">No</option>
-    </select>
+  <label for="consider">Would you consider a diesel vehicle for daily use?</label>
+  <select id="consider" name="consider" required>
+    <option value="">--Please choose an option--</option>
+    <option value="Yes">Yes</option>
+    <option value="No">No</option>
+  </select>
 
-    <fieldset>
-      <legend>How strongly do you feel about your choice?</legend>
-      <label><input type="radio" name="strength" value="Strongly"> Strongly</label>
-      <label><input type="radio" name="strength" value="Somewhat"> Somewhat</label>
-      <label><input type="radio" name="strength" value="Neutral"> Neutral</label>
-    </fieldset>
+  <fieldset>
+    <legend>How strongly do you feel about your choice?</legend>
+    <label><input type="radio" name="strength" value="Strongly" required> Strongly</label>
+    <label><input type="radio" name="strength" value="Somewhat"> Somewhat</label>
+    <label><input type="radio" name="strength" value="Neutral"> Neutral</label>
+  </fieldset>
 
-    <label for="comments">Additional Comments:</label>
-    <textarea id="comments" name="comments" placeholder="Write your thoughts here..."></textarea>
+  <label for="comments">Additional Comments:</label>
+  <textarea id="comments" name="comments" placeholder="Write your thoughts here..."></textarea>
 
-    <div class="buttons">
-      <input type="submit" value="Submit">
-      <input type="reset" value="Reset">
-    </div>
+  <div class="buttons">
+    <input type="submit" value="Submit">
+    <input type="reset" value="Reset">
+  </div>
+</form>
 
-    <div class="votes" id="voteCount">
-      Yes votes: <span id="yesCount">0</span><br>
-      No votes: <span id="noCount">0</span>
-    </div>
-  </form>
+<!-- Success / Error / Loading messages -->
+<div id="formMessage" style="margin-top:15px; font-weight:bold;"></div>
 
-  <script>
-    const form = document.getElementById('dieselForm');
-    const yesCountEl = document.getElementById('yesCount');
-    const noCountEl = document.getElementById('noCount');
+<script>
+  const form = document.getElementById('dieselForm');
+  const formMessage = document.getElementById('formMessage');
 
-    // Load counts from localStorage or initialize to 0
-    let yesVotes = parseInt(localStorage.getItem('dieselVotesYes')) || 0;
-    let noVotes = parseInt(localStorage.getItem('dieselVotesNo')) || 0;
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
 
-    // Display current counts
-    yesCountEl.textContent = yesVotes;
-    noCountEl.textContent = noVotes;
+    // Show loading state with spinner
+    formMessage.style.color = "blue";
+    formMessage.innerHTML = "⏳ Sending... <span style='animation: spin 1s linear infinite;'>🔄</span>";
 
-    form.addEventListener('submit', function(event) {
-      event.preventDefault(); // Prevent page refresh
+    emailjs.sendForm("service_xgai4pn", "template_bbyqyz4", form)
+      .then(() => {
+        formMessage.style.color = "green";
+        formMessage.textContent = "✅ Response sent! Thank you for participating.";
+        form.reset();
+      }, (error) => {
+        formMessage.style.color = "red";
+        formMessage.textContent = "❌ Oops! Something went wrong. Please try again.";
+        console.error("EmailJS Error:", error);
+      });
+  });
 
-      const choice = form.consider.value;
-      if (choice === "Yes") {
-        yesVotes++;
-        localStorage.setItem('dieselVotesYes', yesVotes);
-      } else if (choice === "No") {
-        noVotes++;
-        localStorage.setItem('dieselVotesNo', noVotes);
-      }
+  // Simple CSS spinner animation
+  const style = document.createElement("style");
+  style.innerHTML = `
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+  `;
+  document.head.appendChild(style);
+</script>
 
-      // Update display
-      yesCountEl.textContent = yesVotes;
-      noCountEl.textContent = noVotes;
-
-      alert("Thanks for your response, " + form.name.value + "!");
-      form.reset();
-    });
-  </script>
+  
 
 
 </body>
@@ -183,3 +190,4 @@ fix on your vehicle.</p>
 </footer>
 
 </html>
+
